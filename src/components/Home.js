@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Navbar, Nav, Form, FormControl, Row, Col } from 'react-bootstrap'
 import { FaCartPlus } from 'react-icons/fa'
 import image from "../assets/images/ttt.png"
 import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default function Home() {
+const Home = ({cart}) => {
+    const [cartCount, setCartCount] = useState(0);
+    useEffect(() => {
+        let count = 0;
+        cart.forEach((item) => {
+          count += item.qty;
+        });
+    
+        setCartCount(count);
+      }, [cart, cartCount]);
 
     const history = useHistory();
     const routeChange = () =>{ 
@@ -43,7 +53,7 @@ export default function Home() {
                     <Nav.Link>|</Nav.Link>
                     <Nav.Link href="/help">Help</Nav.Link>
                     <Nav.Link>|</Nav.Link>
-                    <Button variant="secondary" onClick={routeChange}><FaCartPlus /> Your Cart</Button>
+                    <Button variant="secondary" onClick={routeChange}><FaCartPlus /> Your Cart {cartCount}</Button>
                     </Nav>
                 </Col>
                 
@@ -52,3 +62,10 @@ export default function Home() {
         </div>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+      cart: state.shop.cart,
+    };
+  };
+  
+  export default connect(mapStateToProps)(Home)

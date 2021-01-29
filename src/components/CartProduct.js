@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import image from "../assets/images/ttt.png"
-import NumericInput from 'react-numeric-input';
+import { connect } from "react-redux";
+import {
+    adjust_quantity,
+} from "../redux/shopping/shopping-action";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,7 +38,13 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function CartProduct() {
+function CartProduct({item, adjust_quantity}) {
+    const [input, setInput] = useState(item.qty);
+
+    const onChangeHandler = (e) => {
+        setInput(e.target.value);
+        adjust_quantity(item.id, e.target.value);
+    };
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -44,7 +52,7 @@ export default function CartProduct() {
                 <Grid item xs={3} className={classes.paper}>
                     <img
                         alt=""
-                        src={image}
+                        src={item.image}
                         width="200"
                         height="100"
                         className="d-inline-block align-top"
@@ -53,22 +61,36 @@ export default function CartProduct() {
                 <Grid item xs={6} className={classes.name}>
                     <ul>
                         <text>
-                          <div className={classes.name1}>PRODUCT NAME</div>
+                          <div className={classes.name1}>{item.name}</div>
                         </text>
                         <text>
-                          <div className={classes.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                          <div className={classes.text}>{item.description}</div>
                         </text>
                         <text>
-                          <div className={classes.text}>$300</div>
+                          <div className={classes.text}>${item.price}</div>
                         </text>
                     </ul>
                 </Grid>
                 <Grid item xs={3} className={classes.quantity}>
                     <text>
-                        <NumericInput min={0} max={100} value={1}/>
+                    <input
+                        min="1"
+                        type="number"
+                        id="qty"
+                        name="qty"
+                        value={input}
+                        onChange={onChangeHandler}
+                    />
                     </text>
                 </Grid>
             </Grid>
         </div>
     )
 }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        adjust_quantity: (id, value) => dispatch(adjust_quantity(id, value)),
+    };
+  };
+  
+  export default connect(null, mapDispatchToProps)(CartProduct)
