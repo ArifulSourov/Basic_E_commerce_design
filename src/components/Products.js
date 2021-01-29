@@ -1,18 +1,18 @@
 import React from 'react'
 import Product from './Product'
-import { Button, Card, Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux';
-import { Container } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 const Products = ({products}) => {
     return (
-        <Container xl={4}>
+        <Grid container spacing={5}>
             {products.map((prod) => (
-            <Row xl={4}>
-                <Product key={prod.id} productData={prod} />
-            </Row>
+                    <Grid key={prod.id} item>
+                        <Product productData={prod} />
+                    </Grid>
             ))}
-        </Container>
+        </Grid>
+            
     )
 }
 

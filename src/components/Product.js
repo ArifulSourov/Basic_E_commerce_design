@@ -22,15 +22,14 @@ function Product({add_to_cart, productData}) {
     const classes = useStyles();
 
     return (
-        <Container xl={4} className={classes.root}>
-                <Col sm={4}>
+        <Container className={classes.root}>
                     <Card style={{ width: '10rem' }}>
                         <Card.Img variant="top" src={productData.image} />
-                        <Card.Text>{productData.name}</Card.Text>
-                        <Card.Text>${productData.price}</Card.Text>
-                        <Button onClick={() => add_to_cart(productData.id)} variant="secondary">Add to cart</Button>
                     </Card>
-                </Col>
+                    <Card.Text>{productData.name}</Card.Text>
+                    <Card.Text>${productData.price}</Card.Text>
+                    <Button onClick={() => add_to_cart(productData.id)} variant="secondary">Add to cart</Button>
+
         </Container>
     );
 }
