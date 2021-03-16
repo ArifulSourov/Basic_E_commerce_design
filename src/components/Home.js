@@ -3,8 +3,6 @@ import { Button, Navbar, Nav, Form, FormControl, Row, Col } from 'react-bootstra
 import { FaCartPlus } from 'react-icons/fa'
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import Sidebar from "./Sidebar"
-import SIdebar from './Sidebar';
 
 const Home = ({cart}) => {
     const [cartCount, setCartCount] = useState(0);

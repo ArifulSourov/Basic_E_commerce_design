@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, Col, Row } from 'react-bootstrap'
 import { Container } from '@material-ui/core';
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  add_to_cart, view_details
+  add_to_cart
 } from "../redux/shopping/shopping-action";
 
 const useStyles = makeStyles((theme) => ({

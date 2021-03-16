@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { Button, Card, Col, Row } from 'react-bootstrap'
 import { Container } from '@material-ui/core';
@@ -109,8 +109,7 @@ function ProductDetails({add_to_cart, products}) {
         </div>
     )
 }
-const mapDispatchToProps = (dispatch, state) => {
-    console.log(state.shop)
+const mapDispatchToProps = (dispatch) => {
   return {
     add_to_cart: (id) => dispatch(add_to_cart(id)),
     view_details: (id, product) => dispatch(view_details(id, product)),

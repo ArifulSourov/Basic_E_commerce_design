@@ -13,7 +13,6 @@ import Cart from './components/Cart';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import ProductDetails from './components/ProductDetails';
 import Checkout from './components/Checkout'
-import Sidebar from './components/Sidebar';
 
 function App() {
   return (
