@@ -85,7 +85,7 @@ export default function Footer() {
                     <img
                         alt=""
                         src={image}
-                        width="300"
+                        width="500"
                         height="200"
                         className="d-inline-block align-top"
                     />

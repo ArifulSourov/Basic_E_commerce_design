@@ -19,3 +19,12 @@ export const adjust_quantity = (itemID, value) => {
         }
     }
 }
+
+export const view_details = (itemID) => {
+    return {
+        type: actionTypes.PRODUCT_DETAILS,
+        payload: {
+            id: itemID
+        }
+    }
+}

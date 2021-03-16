@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         display: 'flex',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         padding: theme.spacing(6),
         textAlign: 'center',
         color: theme.palette.text.secondary,
@@ -53,19 +53,22 @@ function CartProduct({item, adjust_quantity}) {
                     <img
                         alt=""
                         src={item.image}
-                        width="200"
-                        height="100"
+                        width="300"
+                        height="200"
                         className="d-inline-block align-top"
                     />
                 </Grid>
                 <Grid item xs={6} className={classes.name}>
                     <ul>
+                        <br />
                         <text>
                           <div className={classes.name1}>{item.name}</div>
                         </text>
+                        <br/>
                         <text>
                           <div className={classes.text}>{item.description}</div>
                         </text>
+                        <br/>
                         <text>
                           <div className={classes.text}>${item.price}</div>
                         </text>

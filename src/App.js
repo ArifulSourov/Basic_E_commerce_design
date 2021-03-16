@@ -11,12 +11,17 @@ import About from './components/About';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import ProductDetails from './components/ProductDetails';
+import Checkout from './components/Checkout'
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
+          <Route path={`${process.env.PUBLIC_URL}/Checkout`} component={CheckoutPage} />
+          <Route path={`${process.env.PUBLIC_URL}/Details`} component={DetailsPage} />
           <Route path={`${process.env.PUBLIC_URL}/Cart`} component={CartPage} />
           <Route path={`${process.env.PUBLIC_URL}`} component={HomePage} />
         </Switch>
@@ -24,6 +29,17 @@ function App() {
     </BrowserRouter>
   );
 };
+
+const CheckoutPage = () => (
+  <div>
+    <Home />
+    <br />
+      <br /><br />
+      <br />
+      <br />
+      <Checkout />
+  </div>
+)
 
 const CartPage = () => (
   <div>
@@ -34,6 +50,21 @@ const CartPage = () => (
       <br />
       <br />
     <Cart />
+  </div>
+);
+
+const DetailsPage = () => (
+  <div>
+    <Home />
+    <br />
+      <br />
+      <br /><br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    <ProductDetails />
   </div>
 );
 

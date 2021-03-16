@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Navbar, Nav, Form, FormControl, Row, Col } from 'react-bootstrap'
 import { FaCartPlus } from 'react-icons/fa'
-import image from "../assets/images/ttt.png"
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
+import Sidebar from "./Sidebar"
+import SIdebar from './Sidebar';
 
 const Home = ({cart}) => {
     const [cartCount, setCartCount] = useState(0);
@@ -23,24 +24,22 @@ const Home = ({cart}) => {
       }
     return (
         <div>
+        {/* <Sidebar /> */}
         <Navbar fixed="top" bg="light" expand="lg" className="bg-light justify-content-center">
             <Navbar.Brand href="/">
-                <img
-                    alt=""
-                    src={image}
-                    width="100"
-                    height="50"
-                    className="d-inline-block align-top"
-                />
+                <text style={{fontSize: 40}}>Basic E-commerce</text>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             
                 <Col>
                     <Form inline>
-                    <FormControl type="text" placeholder="🔍 Search" className="mr-sm-2" />
-                    {/* <Button variant="outline-success">Search</Button> */}
+                    
+                        {/* <Sidebar /> */}
                     </Form>
+                </Col>
+                <Col>
+                    <FormControl type="text" placeholder="🔍 Search" className="mr-sm-2" />
                 </Col>
                 <Col>
                     <Nav className="mr-auto">

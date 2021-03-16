@@ -3,12 +3,16 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import { Grid } from '@material-ui/core';
+import { Checkbox, Grid } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import { Button } from 'react-bootstrap'
 import CartProduct from './CartProduct'
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 const AntTabs = withStyles({
   root: {
@@ -81,14 +85,13 @@ const useStyles = makeStyles((theme) => ({
   button: {
       display: 'flex',
       justifyContent: 'flex-start',
-      marginLeft: -20,
+      marginLeft: -20
   }
 
 }));
 
-function Cart({ cart }) {
+function Checkout({ cart }) {
   const classes = useStyles();
-  const history = useHistory();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -109,11 +112,7 @@ function Cart({ cart }) {
     setTotalItems(items);
     setTotalPrice(price);
   }, [cart, totalPrice, totalItems, setTotalPrice, setTotalItems]);
-
-  const routeChange = () =>{ 
-    let path = `Checkout`; 
-   history.push(path);
-  }
+  console.log(cart,"ggg")
 
   return (
     <div className={classes.root}>
@@ -122,7 +121,7 @@ function Cart({ cart }) {
         <Grid item xs={11} >
             <div className={classes.demo1}>
                 <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-                <AntTab label="1. Shopping Cart" />
+                <AntTab label="Shopping Cart" />
                 </AntTabs>
                 <Typography className={classes.padding} />
             </div>
@@ -130,27 +129,46 @@ function Cart({ cart }) {
         <Grid item xs={1}></Grid>
         <Grid item xs={7}>
             <div>
-                <text className={classes.text}>Shopping Cart</text>
+                <text className={classes.text}>Products</text>
                 <Divider />
-                {cart.map((item) => (
-                  <CartProduct key={item.id} item={item} />
-                ))}
+                    {cart.map((item) => (
+                    <CartProduct key={item.id} item={item} />
+                    ))}
                 <Divider />
                 <br />
-                <br />
-                <br />
+                <div>
+                    <FormControl style={{display:"flex", justifyContent:"flex-start"}}>
+                        <FormGroup>
+                        <FormControlLabel
+                            control={<Checkbox color="primary" name="Visa/Master Card"/>}
+                            label="Visa/Master Card"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox color="primary" name="Bkash"/>}
+                            label="Bkash"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox color="primary" name="Cash on Delivery"/>}
+                            label="Cash on Delivery"
+                        />
+                        </FormGroup>
+                    </FormControl>
+                    <br />
+                </div>
                 <div className={classes.button}>
-                  <br />
-                  <br />
-                  <br />
-                  <Button onClick={routeChange} variant="danger">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checkout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <Button variant="light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
+                    <br />
+                    <br />
+                    <br />
+                    <Button variant="primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirm Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button variant="light">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Button>
                 </div>
             </div>
         </Grid>
         <Grid item xs={4}>
             <div>
                 <text className={classes.text1}>Summary</text>
+                <Divider /><br />
+                <textarea className={classes.text3} placeholder="Enter Coupon Code"></textarea>
                 <br />
                 <Divider /><br />
                 <text className={classes.text2}>SUBTOTAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${totalPrice}</text><br />
@@ -170,4 +188,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps)(Checkout);
